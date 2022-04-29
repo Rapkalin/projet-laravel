@@ -3,12 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.tailwindcss.com"></script>
 
         <title>@yield('title', 'default title')</title>
 
     </head>
-    <body>
-        @yield('content')
+    <body class="flex flex-col items-center justify-between min-h-screen py-5">
+        <main role="'main" class="flex flex-col items-center">
+            @yield('content')
+        </main>
 
         <footer>
             <p>&copy; Copyright {{ date('Y') }} &middot; &hearts;&hearts;&hearts;</p>
