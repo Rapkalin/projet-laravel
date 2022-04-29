@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    <title>Welcome home &hearts;</title>
-@endsection
+@section('title', 'Welcome home | ' . config('app.name'))
 
 @section('content')
       <h1>Coucou</h1>

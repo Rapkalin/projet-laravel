@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        @yield('title')
+        <title>@yield('title', 'default title')</title>
 
     </head>
     <body>
