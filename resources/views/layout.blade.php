@@ -4,14 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>What about us? &hearts;</title>
+        @yield('title')
 
     </head>
     <body>
         @yield('content')
 
-    <footer>
-        <p>&copy; Copyright {{ date('Y') }} &middot; &hearts;&hearts;&hearts;</p>
-    </footer>
+        <footer>
+            <p>&copy; Copyright {{ date('Y') }} &middot; &hearts;&hearts;&hearts;</p>
+        </footer>
     </body>
 </html>
