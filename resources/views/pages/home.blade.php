@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('title', 'Welcome home | ' . config('app.name'))
+@extends('layout', ['title' => 'Welcome home'])
 
 @section('content')
     <img src="{{asset('images/The_X-Files_title_logo.png')}}" alt="Xfiles logo" class="h-64">
