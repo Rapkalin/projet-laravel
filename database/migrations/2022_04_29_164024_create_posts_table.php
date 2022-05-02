@@ -19,9 +19,11 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->string('image');
             $table->text('content');
-            $table->boolean('published');
-            $table->boolean('feature');
+            $table->boolean('published')->default(false);
+            $table->boolean('feature')->default(false);
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

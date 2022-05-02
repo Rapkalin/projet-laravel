@@ -8,3 +8,8 @@ if(!function_exists('page_title')) {
             : config('app.name');
     }
 }
+
+// Get database name
+function getDatabaseName() {
+    return DB::connection()->getDatabaseName();
+}
