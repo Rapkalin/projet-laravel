@@ -9,7 +9,11 @@ class UsersController extends Controller
 {
     public function index() {
         $users = User::all();
-        dd($users);
-        return view('pages/users');
+        return view('pages/users', ['users' => $users]);
+    }
+
+    public function getUsers() {
+        return "test acces var";
     }
 }
+
