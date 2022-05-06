@@ -17,13 +17,41 @@ class InsertUsersIntoUsersTable extends Migration
     {
         $users =
             [
-                ["name" => "Raphael", 'email' => "r.kalinowski@mazarine.com","password" => "root"],
-                ["name" => "Julien", 'email' => "j.schmitt@mazarine.com","password" => "root"],
-                ["name" => "Pierre", 'email' => "p.bonnefoi@mazarine.com","password" => "root"],
-                ["name" => "Franck", 'email' => "f.dace@mazarine.com","password" => "root"],
-                ["name" => "Yassine", 'email' => "y.benazziz@mazarine.com","password" => "root"],
-                ["name" => "Didier", 'email' => "d.poupry@mazarine.com","password" => "root"],
-                ["name" => "Camille", 'email' => "c.gilbert@mazarine.com","password" => "root"],
+                [
+                    'name' => "Raphael",
+                    'email' => "r.kalinowski@mazarine.com",
+                    'password' => "root"
+                ],
+                [
+                    'name' => "Julien",
+                    'email' => "j.schmitt@mazarine.com",
+                    'password' => "root"
+                ],
+                [
+                    'name' => "Pierre",
+                    'email' => "p.bonnefoi@mazarine.com",
+                    'password' => "root"
+                ],
+                [
+                    'name' => "Franck",
+                    'email' => "f.dace@mazarine.com",
+                    'password' => "root"
+                ],
+                [
+                    'name' => "Yassine",
+                    'email' => "y.benazziz@mazarine.com",
+                    'password' => "root"
+                ],
+                [
+                    'name' => "Didier",
+                    'email' => "d.poupry@mazarine.com",
+                    'password' => "root"
+                ],
+                [
+                    'name' => "Camille",
+                    'email' => "c.gilbert@mazarine.com",
+                    'password' => "root"
+                ],
             ];
 
         foreach ($users as $user)
