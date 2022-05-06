@@ -13,20 +13,22 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->string("title");
-            $table->string('slug')->unique();
-            $table->string('image');
-            $table->text('content');
-            $table->boolean('published')->default(false);
-            $table->boolean('feature')->default(false);
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('posts')) {
+            Schema::create('posts', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string("title");
+                $table->string('slug')->unique();
+                $table->string('image');
+                $table->text('content');
+                $table->boolean('published')->default(false);
+                $table->boolean('feature')->default(false);
+                $table->integer('user_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->integer('category_id')->unsigned();
+                $table->foreign('category_id')->references('id')->on('categories');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
