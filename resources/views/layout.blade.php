@@ -11,6 +11,9 @@
     <body class="flex flex-col items-center justify-between min-h-screen py-5">
         <main role="'main" class="flex flex-col items-center">
             <button><a href="/">back home</a></button>
+            <p>{{ route('edit(1)') }}</p>
+            <button><a href="/user/edit/{id}">edit user</a></button>
+
             @yield('content')
         </main>
 

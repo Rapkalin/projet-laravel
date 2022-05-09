@@ -19,6 +19,6 @@ Route::get('/', [PagesController::class, 'index']);
 Route::get('about', [PagesController::class, 'about']);
 
 // Users routes
-rouge::get('users/{id}', [UsersController::class, 'edit'])->name('edit');
+Route::get('users/edit/{id}', [UsersController::class, 'edit'])->name('edit');
+Route::post('users/edit/{id}', [UsersController::class, 'update'])->name('update');
 Route::get('users', [UsersController::class, 'index']);
-

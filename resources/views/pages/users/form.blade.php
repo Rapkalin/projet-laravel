@@ -2,6 +2,7 @@
 
 
 
-{!! Form::open(['route', "users/{id}"]) !!}
-
+{!! Form::model($user, ['route' => ['edit', $user->id]]) !!}
+    {{ Form::text('name') }}
+    {{ Form::submit('Save') }}
 {!! Form::close() !!}

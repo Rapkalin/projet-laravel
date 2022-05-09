@@ -26,12 +26,13 @@ class UsersController extends Controller
 
     public function edit()
     {
-        //
+       $user = User::first();
+       return view('pages/users/form', ['user' => $user]);
     }
 
     public function update()
     {
-        //
+        die("update");
     }
 
     public function delete()
