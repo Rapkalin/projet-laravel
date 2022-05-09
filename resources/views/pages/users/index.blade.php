@@ -1,3 +1,6 @@
+@extends('layout', ['title' => 'User page'])
+
+@section('content')
 <h1>Here is the users page</h1>
 @if(session()->has('message'))
     <div class="alert">
@@ -15,3 +18,4 @@
     </div>
  @endforeach
 <p>fin</p>
+@endsection
