@@ -10,7 +10,7 @@
     </head>
     <body class="flex flex-col items-center justify-between min-h-screen py-5">
         <main role="'main" class="flex flex-col items-center">
-            <button><a href="pages/users/index.blade.php">users test</a></button>
+            <button><a href="/">back home</a></button>
             @yield('content')
         </main>
 
