@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 use Log;
 
 class UsersController extends Controller
@@ -26,12 +27,18 @@ class UsersController extends Controller
 
     public function edit()
     {
-        //
+       $user = User::first();
+       return view('pages/users/form', ['user' => $user]);
     }
 
     public function update()
     {
-        //
+        $user = User::first();
+        $request = Request::post();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->save();
+        return redirect('users')->with('message', "!! The user has been updated !!");
     }
 
     public function delete()

@@ -1,6 +1,12 @@
 <h1>Here is the users page</h1>
-@foreach($users as $user)
+@if(session()->has('message'))
+    <div class="alert">
+        {{ session()->get('message') }}
+        <br>
+    </div>
+@endif
 
+@foreach($users as $user)
     <div>
         <li> User n°{{ $user->id }}</li>
         <li> Name {{ $user->name }}</li>
