@@ -1,11 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\TagsController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +14,7 @@ use App\Http\Controllers\AppController;
 |
 */
 
-Route::get('/', [AppController::class, 'index']);
-Route::get('/about', [AppController::class, 'about']);
+Route::get('/', [PagesController::class, 'index']);
+Route::get('about', [PagesController::class, 'about']);
+Route::get('users', [UsersController::class, 'index']);
 
