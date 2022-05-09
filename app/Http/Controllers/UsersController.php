@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index() {
-        $users = User::all();
-        return view('pages/users', ['users' => $users]);
+    public function index()
+    {
+        $users = $this->getUsers();
+        return view('pages/users/inde', ['users' => $users]);
     }
 
-    public function getUsers() {
-        return "test acces var";
+    public function getUsers()
+    {
+        return User::all();
     }
 }
 

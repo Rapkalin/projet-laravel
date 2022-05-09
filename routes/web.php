@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TagsController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Controller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +18,6 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/', [UsersController::class, 'index']);
+Route::get('/', [Controller::class, 'index']);
+Route::get('/about', [Controller::class, 'about']);
+

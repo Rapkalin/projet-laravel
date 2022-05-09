@@ -7,6 +7,5 @@
         <li> Email {{ $user->email }}</li>
         <br>
     </div>
-
  @endforeach
 <p>fin</p>
