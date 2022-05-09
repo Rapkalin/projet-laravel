@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Log;
 
 class UsersController extends Controller
 {
@@ -15,7 +15,27 @@ class UsersController extends Controller
 
     public function getUsers()
     {
+        Log::info(
+            "User::all() call",
+            [
+                "Origin" => __METHOD__,
+            ]
+        );
         return User::all();
     }
-}
 
+    public function edit()
+    {
+        //
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function delete()
+    {
+        //
+    }
+}
