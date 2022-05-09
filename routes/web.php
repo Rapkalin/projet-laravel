@@ -5,7 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,6 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [Controller::class, 'index']);
-Route::get('/about', [Controller::class, 'about']);
+Route::get('/', [AppController::class, 'index']);
+Route::get('/about', [AppController::class, 'about']);
 
