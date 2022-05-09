@@ -10,7 +10,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->getUsers();
-        return view('pages/users/inde', ['users' => $users]);
+        return view('pages/users/index', ['users' => $users]);
     }
 
     public function getUsers()
