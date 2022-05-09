@@ -16,4 +16,19 @@ class PostsController extends Controller
     {
         return Post::all();
     }
+
+    public function edit()
+    {
+        //
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function delete()
+    {
+        //
+    }
 }

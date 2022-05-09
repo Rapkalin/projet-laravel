@@ -16,4 +16,19 @@ class TagsController extends Controller
     {
         return Tags::all();
     }
+
+    public function edit()
+    {
+        //
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function delete()
+    {
+        //
+    }
 }

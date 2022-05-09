@@ -23,4 +23,19 @@ class UsersController extends Controller
         );
         return User::all();
     }
+
+    public function edit()
+    {
+        //
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function delete()
+    {
+        //
+    }
 }
