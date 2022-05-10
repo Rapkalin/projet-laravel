@@ -8,10 +8,13 @@
         <title>{{page_title($title ?? null)}}</title>
 
     </head>
-    <body class="flex flex-col items-center justify-between min-h-screen py-5">
-        <main role="'main" class="flex flex-col items-center">
-            <button><a href="/">back home</a></button>
-            @yield('content')
+    <body class="flex flex-col items-center justify-between min-h-screen py-5 mb-4">
+
+        <main role="'main" class="flex flex-col items-center ">
+            <div>
+                <button><a href="/">back home</a></button>
+                @yield('content')
+            </div>
         </main>
 
         @include('partials._footer')
