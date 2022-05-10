@@ -21,4 +21,4 @@ Route::get('about', [PagesController::class, 'about']);
 // Users routes
 Route::get('users/edit/{id}', [UsersController::class, 'edit'])->name('userEdit');
 Route::put('users/edit/{id}', [UsersController::class, 'update'])->name('userUpdate');
-Route::get('users', [UsersController::class, 'index']);
+Route::get('users', [UsersController::class, 'index'])->name('usersIndex');

@@ -3,10 +3,13 @@
 @section('content')
 <h1>Here is the edit page for the user</h1>
 
-{!! Form::model($user, ['route' => ['userUpdate', $user->id]]) !!}
-    {{ Form::text('name') }}
-    {{ Form::text('email') }}
-    {{ Form::password('password', ['class' => 'password']) }}
-    {{ Form::submit('Save') }}
-{!! Form::close() !!}
+<div>
+    {!! Form::model($user, ['route' => ['userUpdate', $user->id]]) !!}
+        {{ Form::text('name') }}
+        {{ Form::text('email') }}
+        {{ Form::password('password', ['class' => 'password']) }}
+        {{ Form::submit('Save') }}
+    {!! Form::close() !!}
+</div>
+    <button><a href="{{ route('usersIndex') }}">Back to users list</a></button>
 @endsection
