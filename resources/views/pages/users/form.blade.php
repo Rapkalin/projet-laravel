@@ -4,7 +4,7 @@
 <h1>Here is the edit page for the user</h1>
 
 <div>
-    {!! Form::model($user, ['route' => ['userUpdate', $user->id], 'method' => 'put']) !!}
+    {!! Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'put']) !!}
 
         <span class="shadow
                     appearance-none

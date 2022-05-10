@@ -20,7 +20,7 @@
                     font-bold
                     py-2 px-4
                     rounded">
-            <a href="{{ route('userEdit', $user->id) }}">Edit user</a>
+            <a href="{{ route('user.edit', $user->id) }}">Edit user</a>
         </button>
     </div>
     <br>
