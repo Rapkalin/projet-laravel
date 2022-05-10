@@ -25,15 +25,15 @@ class UsersController extends Controller
         return User::all();
     }
 
-    public function edit()
+    public function edit($userId)
     {
-       $user = User::first();
-       return view('pages/users/form', ['user' => $user]);
+        $user = User::find($userId);
+        return view('pages/users/form', ['user' => $user]);
     }
 
-    public function update()
+    public function update($userId)
     {
-        $user = User::first();
+        $user = User::find($userId);
         $request = Request::post();
         $user->name = $request['name'];
         $user->email = $request['email'];
