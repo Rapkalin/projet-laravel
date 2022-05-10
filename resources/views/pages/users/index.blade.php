@@ -14,9 +14,15 @@
         <li> User n°{{ $user->id }}</li>
         <li> Name {{ $user->name }}</li>
         <li> Email {{ $user->email }}</li>
-        <button><a href="{{ route('userEdit', $user->id) }}">Edit user</a></button>
-        <br>
+        <button class="bg-green-500
+                    hover:bg-green-700
+                    text-white
+                    font-bold
+                    py-2 px-4
+                    rounded">
+            <a href="{{ route('user.edit', $user->id) }}">Edit user</a>
+        </button>
     </div>
+    <br>
  @endforeach
-<p>fin</p>
 @endsection
