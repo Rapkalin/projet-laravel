@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Log;
 
 
@@ -25,10 +26,25 @@ class PostsController extends Controller
         return Post::all();
     }
 
+    public function getTags($post)
+    {
+        $tags = $post->tags();
+    }
+
     public function edit($postId)
     {
         $post = Post::find($postId);
-        return view('pages/posts/form', ['post' => $post]);
+        $listTags = Tag::all();
+        foreach ($post->tags as $tag)
+        {
+            $postTags[] = $tag->name;
+        }
+
+        foreach ($listTags as $tag)
+        {
+            $tags[] = $tag->name;
+        }
+        return view('pages/posts/form', ['post' => $post, 'postTags' => $postTags, 'tags' => $tags]);
     }
 
     public function update($postId)
