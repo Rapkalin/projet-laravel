@@ -28,16 +28,17 @@ class PostsController extends Controller
 
     public function getTags($post)
     {
-        $tags = $post->tags();
+        return $post->tags();
     }
 
     public function edit($postId)
     {
         $post = Post::find($postId);
         $listTags = Tag::all();
+        $postTags = [];
         foreach ($post->tags as $tag)
         {
-            $postTags[] = $tag->name;
+            $postTags[] = $tag->id;
         }
 
         foreach ($listTags as $tag)

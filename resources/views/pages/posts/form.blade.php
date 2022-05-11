@@ -57,10 +57,10 @@
                     leading-tight
                     focus:outline-none
                     focus:shadow-outline"
-              id="published"
+              id="tags"
               type="text"
-              placeholder="published">
-                {{ Form::select('tags', $tags, $postTags, ['placeholder' => 'Choisissez une option', 'multiple' => true]) }}</span>
+              placeholder="tags">
+                {{ Form::select('tags[]', $tags, $postTags, ['placeholder' => 'Tags', 'multiple' => true]) }}</span>
 
         <button class="bg-green-500
                     hover:bg-green-700
