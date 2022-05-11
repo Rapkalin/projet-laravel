@@ -64,5 +64,5 @@
                 font-bold
                 py-2 px-4
                 rounded">
-    <a href="{{ route('users') }}">Back to users list</a></button>
+    <a href="{{ route('users.index') }}">Back to users list</a></button>
 @endsection
