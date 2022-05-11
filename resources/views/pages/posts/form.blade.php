@@ -48,6 +48,20 @@
               placeholder="published">
                 {{ Form::select('Publié', ['Publié', 'Brouillon'], null, ['placeholder' => 'Choisissez une option']) }}</span>
 
+        <span class="shadow
+                    appearance-none
+                    border rounded
+                    w-full
+                    py-2 px-3
+                    text-gray-700
+                    leading-tight
+                    focus:outline-none
+                    focus:shadow-outline"
+              id="published"
+              type="text"
+              placeholder="published">
+                {{ Form::select('tags', $tags, $postTags, ['placeholder' => 'Choisissez une option', 'multiple' => true]) }}</span>
+
         <button class="bg-green-500
                     hover:bg-green-700
                     text-white
