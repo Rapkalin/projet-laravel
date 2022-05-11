@@ -12,4 +12,12 @@
                     py-2 px-4
                     rounded">
         <a href="{{ route('users.index') }}">Discover the users list</a></button>
+    <br>
+    <button class="bg-blue-500
+                    hover:bg-blue-700
+                    text-white
+                    font-bold
+                    py-2 px-4
+                    rounded">
+        <a href="{{ route('posts.index') }}">Discover the posts list</a></button>
 @endsection
