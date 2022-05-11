@@ -10,7 +10,7 @@ class Category extends Model
     use HasFactory;
 
     public function post() {
-        return $this->hasMany('App/Models/Post');
+        return $this->hasMany('App\Models\Post');
     }
 
     protected $fillable = [
