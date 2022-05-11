@@ -14,7 +14,7 @@ class AddPriorityToTagPostTable extends Migration
     public function up()
     {
         Schema::table('tag_post', function (Blueprint $table) {
-            $table->boolean('priority');
+            $table->boolean('priority')->default(false);
         });
     }
 
@@ -26,7 +26,10 @@ class AddPriorityToTagPostTable extends Migration
     public function down()
     {
         Schema::table('tag_post', function (Blueprint $table) {
-            Schema::dropColumns('tag_post', 'priority');
+            if (Schema::hasColumn('tag_post', 'priority'))
+            {
+                Schema::dropColumns('tag_post', 'priority');
+            }
         });
     }
 }

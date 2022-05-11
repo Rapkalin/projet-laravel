@@ -10,7 +10,7 @@ class Tag extends Model
     use HasFactory;
 
     public function category() {
-        return $this->belongsToMany('App/Models/Post', 'tag_post');
+        return $this->belongsToMany('App\Models\Post', 'tag_post');
     }
 
     protected $fillable = [
