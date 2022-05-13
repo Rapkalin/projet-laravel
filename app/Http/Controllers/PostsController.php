@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use Log;
+use Request;
 
 
 class PostsController extends Controller
@@ -33,19 +34,9 @@ class PostsController extends Controller
 
     public function edit($postId)
     {
-        $post = Post::find($postId);
-        $listTags = Tag::all();
-        $postTags = [];
-        foreach ($post->tags as $tag)
-        {
-            $postTags[] = $tag->id;
-        }
-
-        foreach ($listTags as $tag)
-        {
-            $tags[] = $tag->name;
-        }
-        return view('pages/posts/form', ['post' => $post, 'postTags' => $postTags, 'tags' => $tags]);
+        $post = Post::with('tags')->find($postId);
+        $listAllTags = Tag::select('name', 'id')->pluck('name', 'id')->toArray();
+        return view('pages/posts/form', ['post' => $post, 'listAllTags' => $listAllTags]);
     }
 
     public function update($postId)
@@ -54,7 +45,10 @@ class PostsController extends Controller
         $request = Request::post();
         $post->title = $request['title'];
         $post->content = $request['content'];
+        $post->published = $request['published'];
         $post->save();
+        // setAssociation() - use for the override in the controllers
+        $post->tags()->sync($request['postTags']);
         return redirect('posts')->with('message', "!! The post has been updated !!");
     }
 
