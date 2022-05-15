@@ -16,7 +16,7 @@ class PostsController extends Controller
         $posts = Post::all();
         foreach($posts as $post)
         {
-            $postAuthors[] = User::find($post->user_id)->name;;
+            $postAuthors[] = User::find($post->user_id)->name;
         }
         return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
     }
