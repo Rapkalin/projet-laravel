@@ -16,30 +16,9 @@ class PostsController extends Controller
         $posts = Post::all();
         foreach($posts as $post)
         {
-            $postAuthors[] = $this->getPostAuthor($post);
+            $postAuthors[] = User::find($post->user_id)->name;;
         }
         return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
-    }
-
-    public function getPosts()
-    {
-        Log::info(
-            "Post::all() call",
-            [
-                "Origin" => __METHOD__,
-            ]
-        );
-        return Post::all();
-    }
-
-    public function getTags($post)
-    {
-        return $post->tags();
-    }
-
-    public function getPostAuthor($post)
-    {
-        return User::find($post->user_id)->name;
     }
 
     public function edit($postId)
