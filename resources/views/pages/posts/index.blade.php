@@ -9,11 +9,12 @@
         </div>
     @endif
 
-    @foreach($posts as $post)
+    @foreach($posts as $key => $post)
         <div>
             <li> Post n°{{ $post->id }}</li>
             <li> Title {{ $post->title }}</li>
             <li> Content {{ $post->content }}</li>
+            <li> Author: {{ $postAuthors[$key] }} </li>
             <button class="bg-green-500
                     hover:bg-green-700
                     text-white

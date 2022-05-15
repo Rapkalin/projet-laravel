@@ -12,7 +12,12 @@
 
         <main role="'main" class="flex flex-col items-center ">
             <div>
-                <button><a href="/">back home</a></button>
+                <button class="bg-yellow-500
+                    hover:bg-yellow-700
+                    text-black
+                    font-bold
+                    py-2 px-4
+                    rounded"><a href="/">back home</a></button>
                 @yield('content')
             </div>
         </main>

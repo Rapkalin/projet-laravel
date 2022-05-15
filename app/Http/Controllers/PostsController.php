@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Log;
 use Request;
 
@@ -12,24 +13,12 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = $this->getPosts();
-        return view('pages/posts/index', ['posts' => $posts]);
-    }
-
-    public function getPosts()
-    {
-        Log::info(
-            "Post::all() call",
-            [
-                "Origin" => __METHOD__,
-            ]
-        );
-        return Post::all();
-    }
-
-    public function getTags($post)
-    {
-        return $post->tags();
+        $posts = Post::all();
+        foreach($posts as $post)
+        {
+            $postAuthors[] = User::find($post->user_id)->name;;
+        }
+        return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
     }
 
     public function edit($postId)
