@@ -13,12 +13,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-        foreach($posts as $post)
-        {
-            $postAuthors[] = User::find($post->user_id)->name;
-        }
-        return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
+        $posts = Post::with('user')->all();
+        return view('pages/posts/index', ['posts' => $posts]);
     }
 
     public function edit($postId)
