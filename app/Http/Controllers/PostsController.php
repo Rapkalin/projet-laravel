@@ -33,6 +33,12 @@ class PostsController extends Controller
     {
         $post = Post::find($postId);
         $request = Request::post();
+        foreach ($request as $key => $value) {
+            dump($request);
+            dump("key:", $key);
+            dump("value:", $value);
+        }
+        die("stop");
         $post->title = $request['title'];
         $post->content = $request['content'];
         $post->published = $request['published'];
