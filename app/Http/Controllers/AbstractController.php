@@ -4,16 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\throwException;
 
 abstract class AbstractController extends Controller
 {
-    public function update($model, int $objectId)
+
+    /**
+     * @var Model
+     */
+    private Model $model;
+
+    /**
+     * @throws \Exception
+     */
+    public function __construct()
     {
-        $object = $model::find($objectId);
+        if(!$this->model) {
+            throw new \Exception("No model loaded");
+        }
+    }
+    public function update(int $objectId)
+    {
+        $object = $this->model::find($objectId);
         $request = Request::post();
 
         foreach ($request as $key => $value)
         {
+            #valider que la donnée est dans le fillable et le parameter
             if($key != regex("retirer _") && !is_array($value)) {
                 $object->$key = $request[$key];
             }

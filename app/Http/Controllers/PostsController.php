@@ -11,6 +11,12 @@ use Request;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        # Dans post controller
+        $this->model = Post::class;
+    }
+
     public function index()
     {
         $posts = Post::with('user')->get();
