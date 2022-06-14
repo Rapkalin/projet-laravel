@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Request;
+use function PHPUnit\Framework\isInstanceOf;
 use function PHPUnit\Framework\throwException;
 
 abstract class AbstractController extends Controller
@@ -32,10 +34,17 @@ abstract class AbstractController extends Controller
      */
     public function update(int $objectId)
     {
+        # 1- I retrieve the model
         $this->model = $this->getModel();
+
+        # 2- I retrieve the instance of the model with its id
         $object = $this->model::find($objectId);
+
+        # 3- I retrieve the fillable of the model and the details of the request
         $fillables = $this->getModel()::find($objectId)->getFillable();
         $request = Request::post();
+
+        # 4- I check if the request exist in the fillable and if so I update the property of the object
         foreach ($request as $key => $value)
         {
             #valider que la donnée est dans le fillable et le parameter
@@ -43,26 +52,15 @@ abstract class AbstractController extends Controller
                 $object->$key = $value;
             }
         }
+
+        # 5- I save the object with the new properties
         $object->save();
-        $this->setAssociation($object, $request);
-    }
 
-    # Use for the override in the controllers
-
-    /**
-     * @param $object
-     * @param $request
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @throws \Exception
-     */
-    private function setAssociation($object, $request)
-    {
-        if ($object === $this->model && $object === 'Post')
+        # 6- I set the assocations and return the view
+        if ($object instanceof Post)
         {
             $object->tags()->sync($request['postTags']);
-            return redirect('posts')->with('message', "!! The post has been updated !!");
-        } elseif ($object === $this->model && $object === 'User')
+        } elseif ($object instanceof User)
         {
             return redirect('users')->with('message', "!! The user has been updated !!");
         } else {
