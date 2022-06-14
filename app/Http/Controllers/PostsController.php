@@ -10,13 +10,7 @@ class PostsController extends AbstractController
 {
     public function __construct()
     {
-        # Dans post controller
-        $this->model = Post::class;
-    }
-
-    public function getModel()
-    {
-        return $this->model;
+        parent::__construct(Post::class);
     }
 
     public function index()
@@ -35,12 +29,6 @@ class PostsController extends AbstractController
         $post = Post::with('tags')->find($postId);
         $listAllTags = Tag::select('name', 'id')->pluck('name', 'id')->toArray();
         return view('pages/posts/form', ['post' => $post, 'listAllTags' => $listAllTags]);
-    }
-
-    public function update(int $objectId)
-    {
-        parent::update($objectId);
-        return redirect('posts')->with('message', "!! The post has been updated !!");
     }
 
     /*    public function update($postId)

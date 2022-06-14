@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Request;
@@ -13,16 +14,19 @@ abstract class AbstractController extends Controller
     /**
      * @var Model
      */
-    private $model;
+    private Model $model;
 
     /**
      * @throws \Exception
      */
-    public function __construct()
+    public function __construct(string $modelName)
     {
+        $this->model = new $modelName();
+
         if(!$this->model) {
             throw new \Exception("No model loaded");
         }
+
     }
 
     /**
@@ -32,21 +36,16 @@ abstract class AbstractController extends Controller
      */
     public function update(int $objectId)
     {
-        # 1- I retrieve the model
-        $this->model = $this->getModel();
-
         # 2- I retrieve the instance of the model with its id
         $object = $this->model::find($objectId);
 
         # 3- I retrieve the fillable of the model and the details of the request
-        $fillables = $this->getModel()::find($objectId)->getFillable();
+        $fillables = $this->model::find($objectId)->getFillable(); // @TODO : Create abstract model with getFillable content
         $request = Request::post();
 
         # 4- I check if the request exist in the fillable and if so I update the property of the object
-        foreach ($request as $key => $value)
-        {
-            #valider que la donnée est dans le fillable et le parameter
-            if(in_array($key, $fillables)) {
+        foreach ($request as $key => $value) {
+            if (in_array($key, $fillables, true)) {
                 $object->$key = $value;
             }
         }
@@ -55,14 +54,13 @@ abstract class AbstractController extends Controller
         $object->save();
 
         # 6- I set the assocations and return the view
-        if ($object instanceof Post)
-        {
+        if ($object instanceof Post) {
             $object->tags()->sync($request['postTags']);
-        } elseif ($object instanceof User)
-        {
+            return redirect('posts')->with('message', "!! The post has been updated !!");
+        } elseif ($object instanceof User) {
             return redirect('users')->with('message', "!! The user has been updated !!");
         } else {
-            return throw new \Exception('Incorrect or inexistant model');
+            throw new \Exception('Incorrect or inexistant model');
         }
     }
 }
