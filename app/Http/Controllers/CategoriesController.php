@@ -8,8 +8,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = $this->getCategories();
-        return view('pages/categories/index', ['categories' => $categories]);
+        return view('pages/categories/index', ['categories' => $this->getCategories()]);
     }
 
     public function getCategories()
