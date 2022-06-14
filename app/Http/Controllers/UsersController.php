@@ -8,6 +8,15 @@ use Log;
 
 class UsersController extends Controller
 {
+    protected $fillable = [
+        'name',
+        'email',
+    ];
+
+    public function getFillable() {
+        return $this->fillable;
+    }
+
     public function index()
     {
         $users = $this->getUsers();

@@ -9,6 +9,21 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'image',
+        'content',
+        'published',
+        'featured',
+        'user_id',
+        'category_id',
+    ];
+
+    public function getFillable() {
+        return $this->fillable;
+    }
+
     public function user() {
         return $this->belongsTo('App\Models\User');
     }
@@ -21,14 +36,4 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Tag', 'tag_post');
     }
 
-    protected $fillable = [
-        'title',
-        'slug',
-        'image',
-        'content',
-        'published',
-        'featured',
-        'user_id',
-        'category_id',
-    ];
 }

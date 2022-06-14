@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\throwException;
 
@@ -23,59 +24,47 @@ abstract class AbstractController extends Controller
             throw new \Exception("No model loaded");
         }
     }
+
+    /**
+     * @param int $objectId
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
     public function update(int $objectId)
     {
         $object = $this->model::find($objectId);
         $request = Request::post();
+        $fillables = $this->fillable;
 
-        foreach ($request as $key => $value)
+        foreach ($fillables as $key => $value)
         {
             #valider que la donnée est dans le fillable et le parameter
-            if($key != regex("retirer _") && !is_array($value)) {
-                $object->$key = $request[$key];
+            if(in_array($value, $fillables)) {
+                $object->value = $value;
             }
         }
         $object->save();
+        setAssociation($object);
+    }
 
-        // setAssociation() - use for the override in the controllers
-        if ($object === Post::Model)
+    # Use for the override in the controllers
+    /**
+     * @param $object
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     * @throws \Exception
+     */
+    private function setAssociation(Model $object, RedirectResponse $request)
+    {
+        if ($object === $this->model && $object === 'Post')
         {
             $object->tags()->sync($request['postTags']);
             return redirect('posts')->with('message', "!! The post has been updated !!");
-        } elseif ($object === User::Model)
+        } elseif ($object === $this->model && $object === 'User')
         {
             return redirect('users')->with('message', "!! The user has been updated !!");
+        } else {
+            return throw new \Exception('Incorrect or inexistant model');
         }
     }
-}
-
-
-/*
- * Posts Controller
- */
-public function update($postId)
-{
-    $post = Post::find($postId);
-    $request = Request::post();
-    $post->title = $request['title'];
-    $post->content = $request['content'];
-    $post->published = $request['published'];
-    $post->save();
-    // setAssociation() - use for the override in the controllers
-    $post->tags()->sync($request['postTags']);
-    return redirect('posts')->with('message', "!! The post has been updated !!");
-}
-
-
-/*
- * User Controller
- */
-public function update($userId)
-{
-    $user = User::find($userId);
-    $request = Request::post();
-    $user->name = $request['name'];
-    $user->email = $request['email'];
-    $user->save();
-    return redirect('users')->with('message', "!! The user has been updated !!");
 }
