@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Request;
-use function PHPUnit\Framework\throwException;
 
 abstract class AbstractController extends Controller
 {
