@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
+use Request;
 use Log;
 
 class UsersController extends Controller
@@ -13,7 +13,8 @@ class UsersController extends Controller
         'email',
     ];
 
-    public function getFillable() {
+    public function getFillable()
+    {
         return $this->fillable;
     }
 
