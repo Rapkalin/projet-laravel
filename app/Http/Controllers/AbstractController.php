@@ -36,25 +36,27 @@ abstract class AbstractController extends Controller
         $object = $this->model::find($objectId);
         $fillables = $this->getModel()::find($objectId)->getFillable();
         $request = Request::post();
-        foreach ($fillables as $key => $value)
+        foreach ($request as $key => $value)
         {
             #valider que la donnée est dans le fillable et le parameter
-            if(in_array($value, $fillables)) {
-                $object->$value = $value;
+            if(in_array($key, $fillables)) {
+                $object->$key = $value;
             }
         }
         $object->save();
-        setAssociation($object);
+        $this->setAssociation($object, $request);
     }
 
     # Use for the override in the controllers
+
     /**
      * @param $object
+     * @param $request
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    private function setAssociation(Model $object, RedirectResponse $request)
+    private function setAssociation($object, $request)
     {
         if ($object === $this->model && $object === 'Post')
         {
