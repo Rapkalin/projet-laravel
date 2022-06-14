@@ -8,6 +8,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
+        // @todo: need refactoring
         $categories = $this->getCategories();
         return view('pages/categories/index', ['categories' => $categories]);
     }
