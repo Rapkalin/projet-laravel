@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\RedirectResponse;
 use Request;
 
 abstract class AbstractController extends Controller
@@ -15,12 +12,14 @@ abstract class AbstractController extends Controller
      * @var Model
      */
     private Model $model;
+    private string $indexName;
 
     /**
      * @throws \Exception
      */
     public function __construct(string $modelName)
     {
+        # $this->indexName = regex($modelName); // @TODO : do the regex with Str Façades for plurial modelName and all lowerCase (singular here and plural in route)
         $this->model = new $modelName();
 
         if(!$this->model) {
@@ -52,15 +51,13 @@ abstract class AbstractController extends Controller
 
         # 5- I save the object with the new properties
         $object->save();
+        $this->postUpdate($object, $request);
+        return redirect('posts')->with('message', "!! The {{post}} has been updated !!");
+    }
 
-        # 6- I set the assocations and return the view
-        if ($object instanceof Post) {
-            $object->tags()->sync($request['postTags']);
-            return redirect('posts')->with('message', "!! The post has been updated !!");
-        } elseif ($object instanceof User) {
-            return redirect('users')->with('message', "!! The user has been updated !!");
-        } else {
-            throw new \Exception('Incorrect or inexistant model');
-        }
+    public function postUpdate(Model $object, $request)
+    {
+        // use for overriding
+        return $object;
     }
 }

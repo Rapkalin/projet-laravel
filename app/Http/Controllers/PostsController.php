@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 class PostsController extends AbstractController
 {
@@ -31,24 +32,17 @@ class PostsController extends AbstractController
         return view('pages/posts/form', ['post' => $post, 'listAllTags' => $listAllTags]);
     }
 
-    /*    public function update($postId)
-        {
-            $post = Post::find($postId);
-            $request = Request::post();
-            foreach ($request as $key => $value) {
-                dump($request);
-                dump("key:", $key);
-                dump("value:", $value);
-            }
-            die("stop");
-            $post->title = $request['title'];
-            $post->content = $request['content'];
-            $post->published = $request['published'];
-            $post->save();
-            // setAssociation() - use for the override in the controllers
-            $post->tags()->sync($request['postTags']);
-            return redirect('posts')->with('message', "!! The post has been updated !!");
-        }*/
+    /**
+     * Overide postUpdate AbstractController method
+     * @param \Illuminate\Database\Eloquent\Model $object
+     * @param $request
+     *
+     * @return void
+     */
+    public function postUpdate(Model $object, $request) {
+        $object = parent::postUpdate($object, $request);
+        $object->tags()->sync($request['postTags']);
+    }
 
     public function delete()
     {
