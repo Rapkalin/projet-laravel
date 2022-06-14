@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
-use Log;
-use Request;
-
 
 class PostsController extends AbstractController
 {
@@ -17,7 +14,8 @@ class PostsController extends AbstractController
         $this->model = Post::class;
     }
 
-    public function getModel() {
+    public function getModel()
+    {
         return $this->model;
     }
 
@@ -25,8 +23,8 @@ class PostsController extends AbstractController
     {
         $posts = Post::with('user')->get();
 
-        foreach($posts as $post)
-        {
+        // @todo: useless
+        foreach($posts as $post) {
             $postAuthors[] = User::find($post->user_id)->name;
         }
         return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
@@ -39,7 +37,8 @@ class PostsController extends AbstractController
         return view('pages/posts/form', ['post' => $post, 'listAllTags' => $listAllTags]);
     }
 
-    public function update(int $objectId) {
+    public function update(int $objectId)
+    {
         parent::update($objectId);
         return redirect('posts')->with('message', "!! The post has been updated !!");
     }
