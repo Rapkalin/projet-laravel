@@ -6,8 +6,6 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Request;
-use function PHPUnit\Framework\isInstanceOf;
-use function PHPUnit\Framework\throwException;
 
 abstract class AbstractController extends Controller
 {
