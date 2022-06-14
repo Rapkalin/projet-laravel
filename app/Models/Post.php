@@ -15,7 +15,7 @@ class Post extends Model
         'image',
         'content',
         'published',
-        'featured',
+        'feature',
         'user_id',
         'category_id',
     ];

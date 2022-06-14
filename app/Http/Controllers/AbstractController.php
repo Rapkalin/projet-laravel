@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Request;
 use function PHPUnit\Framework\throwException;
 
 abstract class AbstractController extends Controller
@@ -13,7 +13,7 @@ abstract class AbstractController extends Controller
     /**
      * @var Model
      */
-    private Model $model;
+    private $model;
 
     /**
      * @throws \Exception
@@ -32,15 +32,15 @@ abstract class AbstractController extends Controller
      */
     public function update(int $objectId)
     {
+        $this->model = $this->getModel();
         $object = $this->model::find($objectId);
+        $fillables = $this->getModel()::find($objectId)->getFillable();
         $request = Request::post();
-        $fillables = $this->fillable;
-
         foreach ($fillables as $key => $value)
         {
             #valider que la donnée est dans le fillable et le parameter
             if(in_array($value, $fillables)) {
-                $object->value = $value;
+                $object->$value = $value;
             }
         }
         $object->save();
