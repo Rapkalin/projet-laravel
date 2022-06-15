@@ -15,15 +15,8 @@
             <li> Title {{ $post->title }}</li>
             <li> Content {{ $post->content }}</li>
             <li> Author: {{ $post->user->name }} </li>
-            @php($postTags = [])
-            @foreach ($post->tags as $tag)
-                {!! $postTags[] = $tag->name !!}
-            @endforeach
-            @unless(count($postTags) >= 1)
-                <li> Tags: aucun </li>
-            @else
-                <li> Tags: {{ implode(', ', $postTags) }} </li>
-            @endunless
+            <li> Tags: {{ $post->tagList }}</li>
+            <br>
             <button class="bg-green-500
                     hover:bg-green-700
                     text-white

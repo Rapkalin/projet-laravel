@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PostsController extends AbstractController
@@ -19,7 +18,12 @@ class PostsController extends AbstractController
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $posts = Post::with('user')
+            ->get()
+            ->each(static function($post) {
+                $post->tagList = $post->tags->count() >= 1 ? implode(', ', $post->tags->pluck('name')->toArray()) : 'aucun';
+            })
+        ;
         return view('pages/posts/index', ['posts' => $posts, 'tags' => $this->listAllTags()]);
     }
 
