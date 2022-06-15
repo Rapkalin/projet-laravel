@@ -14,6 +14,9 @@ class PostsController extends AbstractController
         parent::__construct(Post::class);
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $posts = Post::with('user')->get();
@@ -25,6 +28,11 @@ class PostsController extends AbstractController
         return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
     }
 
+    /**
+     * @param $postId
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($postId)
     {
         $post = Post::with('tags')->find($postId);
