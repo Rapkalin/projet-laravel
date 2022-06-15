@@ -20,7 +20,7 @@ abstract class AbstractController extends Controller
      */
     public function __construct(string $modelName)
     {
-        preg_match('/(post|user)/', Str::lower($modelName), $matches); // @TODO : do the regex with Str Façades for plurial modelName and all lowerCase (singular here and plural in route)
+        preg_match('/(post|user)/', Str::lower($modelName), $matches);
         $this->indexName = $matches[0];
         $this->model = new $modelName();
         if(!$this->model) {
