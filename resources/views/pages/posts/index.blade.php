@@ -20,9 +20,9 @@
                 {!! $postTags[] = $tag->name !!}
             @endforeach
             @unless(count($postTags) >= 1)
-            <li> Tags: aucun </li>
+                <li> Tags: aucun </li>
             @else
-            <li> Tags: {{ implode(', ', $postTags) }} </li>
+                <li> Tags: {{ implode(', ', $postTags) }} </li>
             @endunless
             <button class="bg-green-500
                     hover:bg-green-700
