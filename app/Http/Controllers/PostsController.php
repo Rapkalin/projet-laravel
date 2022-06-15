@@ -20,12 +20,7 @@ class PostsController extends AbstractController
     public function index()
     {
         $posts = Post::with('user')->get();
-
-        // @todo: useless
-        foreach($posts as $post) {
-            $postAuthors[] = User::find($post->user_id)->name;
-        }
-        return view('pages/posts/index', ['posts' => $posts, 'postAuthors' => $postAuthors]);
+        return view('pages/posts/index', ['posts' => $posts, 'tags' => $this->listAllTags()]);
     }
 
     /**
@@ -36,8 +31,7 @@ class PostsController extends AbstractController
     public function edit($postId)
     {
         $post = Post::with('tags')->find($postId);
-        $listAllTags = Tag::select('name', 'id')->pluck('name', 'id')->toArray();
-        return view('pages/posts/form', ['post' => $post, 'listAllTags' => $listAllTags]);
+        return view('pages/posts/form', ['post' => $post, 'tags' => $this->listAllTags()]);
     }
 
     /**
@@ -47,7 +41,8 @@ class PostsController extends AbstractController
      *
      * @return void
      */
-    public function postUpdate(Model $object, $request) {
+    public function postUpdate(Model $object, $request)
+    {
         $object = parent::postUpdate($object, $request);
         $object->tags()->sync($request['postTags']);
     }
@@ -56,4 +51,10 @@ class PostsController extends AbstractController
     {
         //
     }
+
+    public function listAllTags()
+    {
+        return Tag::select('name', 'id')->pluck('name', 'id')->toArray();
+    }
+
 }

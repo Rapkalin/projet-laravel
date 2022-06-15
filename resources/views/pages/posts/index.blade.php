@@ -14,7 +14,12 @@
             <li> Post n°{{ $post->id }}</li>
             <li> Title {{ $post->title }}</li>
             <li> Content {{ $post->content }}</li>
-            <li> Author: {{ $postAuthors[$key] }} </li>
+            <li> Author: {{ $post->user->name }} </li>
+            @php($postTags = [])
+            @foreach ($post->tags as $tag)
+                {!! $postTags[] = $tag->name !!}
+            @endforeach
+            <li> Tags: {{ implode(', ', $postTags) }} </li>
             <button class="bg-green-500
                     hover:bg-green-700
                     text-white

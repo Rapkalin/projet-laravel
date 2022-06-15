@@ -60,7 +60,7 @@
               id="postTags"
               type="checkbox"
               placeholder="postTags">
-                {{ Form::select('postTags[]', $listAllTags, $post->tags, ['placeholder' => 'Choisissez une option', 'multiple' => true]) }}</span>
+                {{ Form::select('postTags[]', $tags, $post->tags, ['placeholder' => 'Choisissez une option', 'multiple' => true]) }}</span>
 
         <button class="bg-green-500
                     hover:bg-green-700
