@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function getFillable() {
+        return $this->fillable;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

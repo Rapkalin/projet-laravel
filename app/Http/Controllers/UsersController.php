@@ -6,16 +6,10 @@ use App\Models\User;
 use Request;
 use Log;
 
-class UsersController extends Controller
+class UsersController extends AbstractController
 {
-    protected $fillable = [
-        'name',
-        'email',
-    ];
-
-    public function getFillable()
-    {
-        return $this->fillable;
+    public function __construct() {
+        parent::__construct(User::class);
     }
 
     public function index()
@@ -39,16 +33,6 @@ class UsersController extends Controller
     {
         $user = User::find($userId);
         return view('pages/users/form', ['user' => $user]);
-    }
-
-    public function update($userId)
-    {
-        $user = User::find($userId);
-        $request = Request::post();
-        $user->name = $request['name'];
-        $user->email = $request['email'];
-        $user->save();
-        return redirect('users')->with('message', "!! The user has been updated !!");
     }
 
     public function delete()

@@ -46,7 +46,11 @@ abstract class AbstractController extends Controller
         # 3- I check if the request exist in the fillable and if so I update the property of the object
         foreach ($request as $key => $value) {
             if (in_array($key, $fillables, true)) {
-                $object->$key = $value;
+                if($key === 'password') {
+                    $request['password'] === null ? $object->password = $object->password : $object->password = $value;
+                } elseif ($key != 'password') {
+                    $object->$key = $value;
+                }
             }
         }
 
