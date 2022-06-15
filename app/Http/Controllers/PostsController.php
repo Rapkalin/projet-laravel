@@ -18,7 +18,7 @@ class PostsController extends AbstractController
      */
     public function index()
     {
-        $posts = Post::with('user')
+        $posts = Post::with(['tags', 'user'])
             ->get()
             ->each(static function($post) {
                 $post->tagList = $post->tags->count() >= 1 ? implode(', ', $post->tags->pluck('name')->toArray()) : 'aucun';
