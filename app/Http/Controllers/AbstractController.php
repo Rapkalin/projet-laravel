@@ -8,7 +8,6 @@ use Str;
 
 abstract class AbstractController extends Controller
 {
-
     /**
      * @var Model
      */
