@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Post extends Model
+class Post extends AbstractModel
 {
-    use HasFactory;
-
     protected $fillable = [
         'title',
         'slug',
@@ -20,19 +15,18 @@ class Post extends Model
         'category_id',
     ];
 
-    public function getFillable() {
-        return $this->fillable;
-    }
-
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function tags() {
+    public function tags()
+    {
         return $this->belongsToMany('App\Models\Tag', 'tag_post');
     }
 

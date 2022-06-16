@@ -12,10 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function category() {
-        return $this->hasMany('App\Models\Category');
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -26,10 +22,6 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
-    public function getFillable() {
-        return $this->fillable;
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,4 +42,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Fillable attribute accessor
+     * @return array|string[]
+     */
+    public function getFillable()
+    {
+        return $this->fillable;
+    }
+
+    public function category()
+    {
+        return $this->hasMany('App\Models\Category');
+    }
 }
